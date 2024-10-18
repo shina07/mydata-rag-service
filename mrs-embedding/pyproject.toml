@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "mrs-embedding"
+version = "0.1.0"
+description = ""
+authors = ["Taesoo Lim <limtsoo.shina@gmail.com>"]
+packages = [{ from = "src", include = "*" }]
+
+[tool.poetry.dependencies]
+python = "3.10.14"
+mrs-core = { path = "../mrs-core", extras = ["vectordb"] }
+
+# Document Preprocessing
+pypdf = "5.0.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+pythonpath = ["core"]
