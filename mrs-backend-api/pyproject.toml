@@ -1,23 +1,24 @@
 [tool.poetry]
-name = "backend-api"
+name = "mrs-backend-api"
 version = "0.1.0"
 description = ""
-authors = ["Taesoo Lim <tslim@mnc.ai>"]
+authors = ["Taesoo Lim <limtsoo.shina@gmail.com>"]
 packages = [{ from = "src", include = "*" }]
 
 [tool.poetry.dependencies]
 python = "3.10.14"
+mrs-core = { path = "../mrs-core", extras = ["http"] }
 
 ### COMMON
-pydantic = "2.9.2"
-pydantic-settings = "2.5.2"
-python-dotenv = "1.0.1"
+# pydantic = "2.9.2"
+# pydantic-settings = "2.5.2"
+# python-dotenv = "1.0.1"
 # WEB Framework
-fastapi = "0.115.0"
-gunicorn = "23.0.0"
-uvicorn = "0.31.0"
+# fastapi = "0.115.0"
+# gunicorn = "23.0.0"
+# uvicorn = "0.31.0"
 # HTTP
-aiohttp = "3.10.9"
+# aiohttp = "3.10.9"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
