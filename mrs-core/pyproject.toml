@@ -1,0 +1,48 @@
+# 작성자: 임태수 <limtsoo.shina@gmail.com>
+# 버전: v1.0
+# 최초작성일시: 2024.10.14
+# 최종변경일시: 2024.10.14
+# 설명:
+#   MyData RAG Service (이하 MRS) 내에서 사용하는 패키지 버전을 명시
+#   아래 명시된 패키지 버전을 모든 MRS 패키지 내에서 import 하여 사용한다
+#   아래 명시되지 않은 패키지는 해당 패키지를 사용하는 각 모듈의 pyproject.toml에서 별도 관리하며
+#   별도 패키지를 복수의 모듈에서 사용하게 되는 경우 core로 migration한다.
+# 버전명세:
+#   2024.10.14 기준으로 패키지 일괄 업데이트
+#   이후 고정 버전은 별다른 이슈가 없다면 다음 버전 업데이트 전까지 고정한다.
+[tool.poetry]
+name = "mrs-core"
+version = "0.1.0"
+description = ""
+authors = ["Taesoo Lim <limtsoo.shina@gmail.com>"]
+packages = [{ include = "core" }]
+
+[tool.poetry.dependencies]
+python = "3.10.14"
+
+### COMMON
+pydantic = "2.9.2"
+pydantic-settings = "2.5.2"
+python-dotenv = "1.0.1"
+
+### LIBRARY
+# WEB Framework
+fastapi = { version = "0.115.0", optional = true }
+gunicorn = { version = "23.0.0", optional = true }
+uvicorn = { version = "0.31.0", optional = true }
+# HTTP
+aiohttp = { version = "3.10.9", optional = true }
+# VectorDB (Weaviate, async available from 4.7.0)
+weaviate-client = { version = "4.8.1", optional = true }
+
+[tool.poetry.extras]
+api = ["fastapi", "gunicorn", "uvicorn"]
+http = ["aiohttp"]
+vectordb = ["weaviate-client"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+pythonpath = ["core"]
