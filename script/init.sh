@@ -1,4 +1,4 @@
 #!/bin/bash
-. mrs.config
+. ./mrs.config
 
 docker network create ${NETWORK}
