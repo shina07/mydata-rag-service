@@ -7,7 +7,8 @@ ENV POETRY_NO_INTERACTION=1 \
     POETRY_VIRTUALENVS_CREATE=1 \
     POETRY_CACHE_DIR=/tmp/poetry_cache
 
-COPY backend-api/pyproject.toml backend-api/poetry.lock /app/
+COPY mrs-core/ /mrs-core
+COPY mrs-backend-api/pyproject.toml mrs-backend-api/poetry.lock /app/
 WORKDIR /app
 
 RUN --mount=type=cache,target=$POETRY_CACHE_DIR poetry install --only main --no-root
@@ -22,11 +23,11 @@ RUN apt-get update --fix-missing
 RUN apt-get install -y software-properties-common net-tools curl procps supervisor vim
 
 COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
-COPY backend-api/deployment/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY mrs-backend-api/deployment/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 RUN mkdir -p /app
-COPY backend-api/README.md backend-api/pyproject.toml backend-api/Dockerfile backend-api/env backend-api/deployment/gunicorn /app/
-COPY backend-api/src /app
+COPY mrs-backend-api/README.md mrs-backend-api/pyproject.toml mrs-backend-api/Dockerfile mrs-backend-api/env mrs-backend-api/deployment/gunicorn /app/
+COPY mrs-backend-api/src /app
 
 WORKDIR /app
 
