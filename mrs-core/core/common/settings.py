@@ -21,11 +21,14 @@ class CoreSettings(BaseSettings):
     ENVIRONMENT: str
 
 
-class OpenaiSettings(BaseSettings):
+class OpenAISettings(BaseSettings):
     model_config: SettingsConfigDict = config_dict
 
     OPENAI_API_KEY: str
 
+    OPENAI_CHAT_COMPLETION_ENDPOINT: str
+    OPENAI_EMBEDDINGS_ENDPOINT: str
+
 
 core_settings = CoreSettings()
-openai_settings = OpenaiSettings()
+openai_settings = OpenAISettings()
