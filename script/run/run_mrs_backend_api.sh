@@ -1,14 +1,13 @@
 #!/bin/bash
 . ../mrs.config
 
-echo "${NETWORK}"
-echo "${REGISTRY}"
+echo "IMAGE NAME: ${MRS_BACKEND_API_CONTAINER_NAME}:${MRS_BACKEND_API_TAG}"
+echo "NETWORK: ${MRS_NETWORK}"
 
 docker run -d \
 	--rm \
-	--name mrs-backend-api \
+	--name ${MRS_BACKEND_API_CONTAINER_NAME}  \
+	--network ${MRS_NETWORK}  \
 	-p 8080:8080 \
 	-e "PROFILE=dev" \
-        --network ${NETWORK} \	
-	mrs-backend-api:latest
-
+	${MRS_BACKEND_API_CONTAINER_NAME}:${MRS_BACKEND_API_TAG}
