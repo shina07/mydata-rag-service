@@ -7,7 +7,7 @@ packages = [{ from = "src", include = "*" }]
 
 [tool.poetry.dependencies]
 python = "3.10.14"
-mrs-core = { path = "../mrs-core", extras = ["api", "http"] }
+mrs-core = { path = "../mrs-core", extras = ["api", "http", "langchain", "vectordb"] }
 
 ### COMMON
 # pydantic = "2.9.2"

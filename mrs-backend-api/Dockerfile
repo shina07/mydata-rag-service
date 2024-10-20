@@ -26,8 +26,10 @@ COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 COPY mrs-backend-api/deployment/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 RUN mkdir -p /app
-COPY mrs-backend-api/README.md mrs-backend-api/pyproject.toml mrs-backend-api/Dockerfile mrs-backend-api/env mrs-backend-api/deployment/gunicorn /app/
-COPY mrs-backend-api/src /app
+COPY mrs-backend-api/deployment/gunicorn /app/gunicorn
+COPY mrs-backend-api/README.md mrs-backend-api/pyproject.toml mrs-backend-api/Dockerfile /app/
+COPY mrs-backend-api/env /app/env
+COPY mrs-backend-api/src /app/src
 
 WORKDIR /app
 
