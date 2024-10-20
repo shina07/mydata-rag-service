@@ -7,7 +7,7 @@ packages = [{ from = "src", include = "*" }]
 
 [tool.poetry.dependencies]
 python = "3.10.14"
-mrs-core = { path = "../mrs-core", extras = ["vectordb"] }
+mrs-core = { path = "../mrs-core", extras = ["http", "vectordb", "langchain"] }
 
 # Document Preprocessing
 pypdf = "5.0.1"
