@@ -15,7 +15,7 @@ class ChatCompletionRequestMessage(BaseModel):
 class ChatCompletionResponseMessage(BaseModel):
     role: str
     content: str
-    refusal: bool
+    refusal: Optional[bool] = None
 
 
 class ChatCompletionResponseChoice(BaseModel):
@@ -35,7 +35,8 @@ class ChatCompletionResponseUsage(BaseModel):
 
 class CreateChatCompletionRequest(BaseApiRequest):
     model: str
-    message: List[ChatCompletionRequestMessage]
+    messages: List[ChatCompletionRequestMessage]
+    temperature: Optional[float] = None
 
 
 class CreateChatCompletionResponse(BaseApiResponse):
@@ -45,7 +46,7 @@ class CreateChatCompletionResponse(BaseApiResponse):
     model: str
     choices: List[ChatCompletionResponseChoice]
     usage: ChatCompletionResponseUsage
-    system_fingerprint: str
+    system_fingerprint: Optional[str] = None
 
 
 # Embedding

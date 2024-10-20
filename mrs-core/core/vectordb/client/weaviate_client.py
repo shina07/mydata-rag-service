@@ -92,10 +92,10 @@ async def insert(collection: CollectionAsync, vector: List[float], properties: d
 
 
 @weaviate_transactional
-async def insert_data_many(collection: CollectionAsync, data: List[dict], client: WeaviateAsyncClient = None) -> UUID:
+async def insert_data_many(collection: CollectionAsync, data: List[dict], client: WeaviateAsyncClient = None):
     return await collection.data.insert_many(objects=data)
 
 
 @weaviate_transactional
-async def near_vector(collection: CollectionAsync, vector: List[float], client: WeaviateAsyncClient = None) -> UUID:
+async def near_vector(collection: CollectionAsync, vector: List[float], client: WeaviateAsyncClient = None):
     return await collection.query.near_vector(near_vector=vector, limit=2)

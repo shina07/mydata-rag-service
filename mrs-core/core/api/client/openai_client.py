@@ -20,7 +20,6 @@ class OpenAIClient(BaseApiClient):
 
     async def create_embeddings(self, request: CreateEmbeddingsRequest) -> CreateEmbeddingsResponse:
         response = await self.post(url=openai_settings.OPENAI_EMBEDDINGS_ENDPOINT, request=request)
-        print(response)
         return CreateEmbeddingsResponse.model_validate(response)
 
 
