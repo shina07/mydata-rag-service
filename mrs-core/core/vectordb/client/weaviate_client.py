@@ -46,12 +46,12 @@ def weaviate_transactional(func):
     async def wrapper(*args, **kwargs):
 
         # Client Session Provided
-        if 'weaviate_client' in kwargs:
+        if 'client' in kwargs:
             return await func(*args, **kwargs)
 
         else:
             async with AsyncClientContext() as client:
-                kwargs['weaviate_client'] = client
+                kwargs['client'] = client
 
                 try:
                     return await func(*args, **kwargs)
@@ -63,35 +63,39 @@ def weaviate_transactional(func):
 
 
 @weaviate_transactional
-async def is_ready(weaviate_client: WeaviateAsyncClient = None) -> bool:
-    return await weaviate_client.is_ready()
+async def is_ready(client: WeaviateAsyncClient = None) -> bool:
+    return await client.is_ready()
 
 
 @weaviate_transactional
-async def create_collection(name: str, weaviate_client: WeaviateAsyncClient = None) -> CollectionAsync:
-    return await weaviate_client.collections.create(name=name)
+async def create_collection(name: str, client: WeaviateAsyncClient = None) -> CollectionAsync:
+    return await client.collections.create(name=name)
 
 
 @weaviate_transactional
-async def list_collection(weaviate_client: WeaviateAsyncClient = None):
-    return await weaviate_client.collections.list_all()
+async def list_collection(client: WeaviateAsyncClient = None):
+    return await client.collections.list_all()
 
 
 @weaviate_transactional
-async def get_collection(name: str, weaviate_client: WeaviateAsyncClient = None) -> CollectionAsync:
-    return await weaviate_client.collections.get(name=name)
+async def get_collection(name: str, client: WeaviateAsyncClient = None) -> CollectionAsync:
+    """
+    collections.get() 은 async method 가 아님
+    https://weaviate.io/developers/weaviate/client-libraries/python/async
+    """
+    return client.collections.get(name=name)
 
 
 @weaviate_transactional
-async def insert(collection: CollectionAsync, vector: List[float], properties: dict, weaviate_client: WeaviateAsyncClient = None) -> UUID:
+async def insert(collection: CollectionAsync, vector: List[float], properties: dict, client: WeaviateAsyncClient = None) -> UUID:
     return await collection.data.insert(vector=vector, properties=properties)
 
 
 @weaviate_transactional
-async def insert_data_many(collection: CollectionAsync, data: List[dict], weaviate_client: WeaviateAsyncClient = None) -> UUID:
+async def insert_data_many(collection: CollectionAsync, data: List[dict], client: WeaviateAsyncClient = None) -> UUID:
     return await collection.data.insert_many(objects=data)
 
 
 @weaviate_transactional
-async def near_vector(collection: CollectionAsync, vector: List[float], weaviate_client: WeaviateAsyncClient = None) -> UUID:
+async def near_vector(collection: CollectionAsync, vector: List[float], client: WeaviateAsyncClient = None) -> UUID:
     return await collection.query.near_vector(near_vector=vector, limit=2)

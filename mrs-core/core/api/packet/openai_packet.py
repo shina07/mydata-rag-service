@@ -68,13 +68,13 @@ class EmbeddingResponseUsage(BaseModel):
 class CreateEmbeddingsRequest(BaseApiRequest):
     input: Union[str, List[str]]
     model: str
-    encoding_format: Optional[EmbeddingsEncodingFormat]
-    dimensions: Optional[int]
-    user: Optional[str]
+    # encoding_format: Optional[EmbeddingsEncodingFormat]
+    # dimensions: Optional[int]
+    # user: Optional[str]
 
 
 class CreateEmbeddingsResponse(BaseApiResponse):
     object: str
     data: List[EmbeddingResponseObject]
     model: str
-    usage: EmbeddingResponseUsage
+    # usage: EmbeddingResponseUsage
