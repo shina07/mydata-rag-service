@@ -30,5 +30,19 @@ class OpenAISettings(BaseSettings):
     OPENAI_EMBEDDINGS_ENDPOINT: str
 
 
+class WeaviateSettings(BaseSettings):
+    model_config: SettingsConfigDict = config_dict
+
+    WEAVIATE_HTTP_HOST: str
+    WEAVIATE_HTTP_PORT: int
+    WEAVIATE_HTTP_SECURE: bool
+    WEAVIATE_GRPC_HOST: str
+    WEAVIATE_GRPC_PORT: int
+    WEAVIATE_GRPC_SECURE: bool
+
+    WEAVIATE_COLLECTION_NAME: str
+
+
 core_settings = CoreSettings()
 openai_settings = OpenAISettings()
+weaviate_settings = WeaviateSettings()
